@@ -1,63 +1,73 @@
-#include <stdio.h> //Biblioteca de comunicaÁ„o com o usu·rio
-#include <stdlib.h>//Biblioteca de alocaÁ„o de espaÁo em memÛria
-#include <locale.h>//Biblioteca de alocaÁ„o de texto por regi„o
-#include <string.h>//Biblioteca respons·vel por cuidar das string
+#include <stdio.h> //Biblioteca de comunica√ß√£o com o usu√°rio
+#include <stdlib.h>//Biblioteca de aloca√ß√£o de espa√ßo em mem√≥ria
+#include <locale.h>//Biblioteca de aloca√ß√£o de texto por regi√£o
+#include <string.h>//Biblioteca respons√°vel por cuidar das string
 
-int registro() //FunÁ„o respons·vel por cadastrar os usu·rios no sistema
+int registro() //Fun√ß√£o respons√°vel por cadastrar os usu√°rios no sistema
 {
-	//InÌcio criaÁ„o de vari·veis/string
+	//In√≠cio cria√ß√£o de vari√°veis/string
 	char arquivo[40];
 	char cpf[40];
 	char nome[40];
 	char sobrenome[40];
 	char cargo[40];
-	//Final da criaÁ„o de vari·veis/string
+	//Final da cria√ß√£o de vari√°veis/string
 	
-	printf("Digite o CPF a ser cadastrado: ");//Coletando informaÁ„o do usu·rio
-	scanf("%s", cpf);// %s refere-se a salvar string
-	
-	strcpy(arquivo, cpf);//Respons·vel por copiar os valores das string
-	
-	FILE *file;// Cria o arquivo
-	file = fopen(arquivo, "w");// Cria o arquivo na pasta e o "w" significa escrever
-	fprintf(file, cpf);// Salva o valor da vari·vel
-	fclose(file);//Fecha o arquivo
-	
-	file = fopen(arquivo, "a");
-	fprintf(file, ",");
-	fclose(file);
-	
-	printf("Digite o nome a ser cadastrado: ");
-	scanf("%s", nome);
-	
-	file = fopen(arquivo, "a");
-	fprintf(file, nome);
-	fclose(file);
-	
-	file = fopen(arquivo, "a");
-	fprintf(file, ",");
-	fclose(file);
-	
-	printf("Digite o sobrenome a ser cadastrado: ");
-	scanf("%s", sobrenome);
-	
-	file = fopen(arquivo, "a");
-	fprintf(file, sobrenome);
-	fclose(file);
-	
-	file = fopen(arquivo, "a");
-	fprintf(file, ",");
-	fclose(file);
-	
-	printf("Digite o cargo a ser cadastrado: ");
-	scanf("%s", cargo);
-	
-	file = fopen(arquivo, "a");
-	fprintf(file, cargo);
-	fclose(file);
+	int continuar_registro = 1; // Vari√°vel para controlar o loop de registro
+
+	while(continuar_registro == 1)
+	{
+		printf("Digite o CPF a ser cadastrado: ");//Coletando informa√ß√£o do usu√°rio
+		scanf("%s", cpf);// %s refere-se a salvar string
+		
+		strcpy(arquivo, cpf);//Respons√°vel por copiar os valores das string
+		
+		FILE *file;// Cria o arquivo
+		file = fopen(arquivo, "w");// Cria o arquivo na pasta e o "w" significa escrever
+		fprintf(file, cpf);// Salva o valor da vari√°vel
+		fclose(file);//Fecha o arquivo
+		
+		file = fopen(arquivo, "a");
+		fprintf(file, ",");
+		fclose(file);
+		
+		printf("Digite o nome a ser cadastrado: ");
+		scanf("%s", nome);
+		
+		file = fopen(arquivo, "a");
+		fprintf(file, nome);
+		fclose(file);
+		
+		file = fopen(arquivo, "a");
+		fprintf(file, ",");
+		fclose(file);
+		
+		printf("Digite o sobrenome a ser cadastrado: ");
+		scanf("%s", sobrenome);
+		
+		file = fopen(arquivo, "a");
+		fprintf(file, sobrenome);
+		fclose(file);
+		
+		file = fopen(arquivo, "a");
+		fprintf(file, ",");
+		fclose(file);
+		
+		printf("Digite o cargo a ser cadastrado: ");
+		scanf("%s", cargo);
+		
+		file = fopen(arquivo, "a");
+		fprintf(file, cargo);
+		fclose(file);
+		
+		printf("\nUsu√°rio cadastrado com sucesso!\n");
+		printf("Deseja cadastrar outro usu√°rio? (1 para sim, 0 para voltar ao menu): ");
+		scanf("%d", &continuar_registro);
+		system("cls"); // Limpa a tela para a pr√≥xima itera√ß√£o ou para o menu
+	}
 	
 	system("pause");
-	
+	return 0; // Adicionado um retorno para a fun√ß√£o registro
 }
 
 int consultar()
@@ -75,24 +85,25 @@ int consultar()
 	
 	if(file == NULL)
 	{
-		printf("N„o foi possÌvel abrir o arquivo, n„o localizado!.\n");
+		printf("N√£o foi poss√≠vel abrir o arquivo, n√£o localizado!.\n");
 	}
 	
 	while(fgets(conteudo, 200, file) != NULL)
 	{
-		printf("\nEssas s„o as informaÁıes do usu·rio: ");
+		printf("\nEssas s√£o as informa√ß√µes do usu√°rio: ");
 		printf("%s", conteudo);
 		printf("\n\n");
 	}
 	
 	system("pause");
+	return 0; // Adicionado um retorno para a fun√ß√£o consultar
 }
 
 int deletar()
 {
 	char cpf[40];
 	
-	printf("Digite o CPF do usu·rio a ser deletado: ");
+	printf("Digite o CPF do usu√°rio a ser deletado: ");
 	scanf("%s",cpf);
 	
 	remove(cpf);
@@ -102,42 +113,45 @@ int deletar()
 	
 	if(file == NULL)
 	{
-		printf("O usu·rio n„o se encontra no sistema!.\n");
+		printf("O usu√°rio n√£o se encontra no sistema!.\n");
 		system("pause");
 		
 	}
 	else
-		printf("O usu·rio foi deletado com sucesso!.\n");
+		printf("O usu√°rio foi deletado com sucesso!.\n");
 		system("pause");	
+
+	return 0; // Adicionado um retorno para a fun√ß√£o deletar
 }
+
 int main()
 {
-	int opcao=0;//Definindo vari·veis
+	int opcao=0;//Definindo vari√°veis
 	int laco=1;
 	
 	for(laco=1;laco=1;)
 	{
-		system("cls");//Respons·vel por limpar a tela
+		system("cls");//Respons√°vel por limpar a tela
 	
 	
 		setlocale(LC_ALL, "Portuguese");//Definindo linguagem
 		
-		printf("----- CartÛrio da EBAC -----\n\n");//InÌcio do menu
-		printf("Escolha a opÁ„o desejada do menu:\n\n");
+		printf("----- Cart√≥rio da EBAC -----\n\n");//In√≠cio do menu
+		printf("Escolha a op√ß√£o desejada do menu:\n\n");
 		printf("\t1 - Registrar nomes\n");
 		printf("\t2 - Consultar nomes\n");
 		printf("\t3 - Deletar nomes\n");
 		printf("\t4 - Sair do sistema\n\n");
-		printf("OpÁ„o: ");//Fim do menu	
+		printf("Op√ß√£o: ");//Fim do menu	
 		
-		scanf("%d", &opcao);//Armazenando a escolha do usu·rio
+		scanf("%d", &opcao);//Armazenando a escolha do usu√°rio
 		
-		system("cls");//Respons·vel por limpar a tela
+		system("cls");//Respons√°vel por limpar a tela
 		
-		switch(opcao)//InÌcio da seleÁ„o do menu
+		switch(opcao)//In√≠cio da sele√ß√£o do menu
 		{
 			case 1:
-				registro();//Chamada de funÁıes
+				registro();//Chamada de fun√ß√µes
 				break;
 			
 			case 2:
@@ -154,12 +168,11 @@ int main()
 				break;
 			
 			default:
-				printf("Essa opÁ„o n„o est· disponÌvel!\n");
+				printf("Essa op√ß√£o n√£o est√° dispon√≠vel!\n");
 				system("pause");
 				break;
 				
 		}
-		
-	
 	}
+	return 0; // Adicionado um retorno para a fun√ß√£o main
 }
