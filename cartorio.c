@@ -134,7 +134,7 @@ int main()
 	printf("Login de admnistrador!\n\nDigite a sua senha: ");
 	scanf("%s, senhadigitada");
 
-	if(senhadigitada[10] = "admin")
+	if(senhadigitada[10] == "admin")
 	{
 	
 		for(laco=1;laco=1;)
